@@ -1,0 +1,7 @@
+source https://api.nuget.org/v3/index.json
+
+storage: packages
+framework: netcoreapp3.1, netstandard2.0, netstandard2.1, native
+
+nuget intelmkl.static.win-x64 2020.3.279
+nuget intelmkl.static.win-x86 2020.3.279

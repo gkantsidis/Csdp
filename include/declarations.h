@@ -235,6 +235,7 @@ int bisect_(int *n, double *eps1, double *d, double *e, double *e2,
   First, BLAS routines.
  */
 
+#ifndef INTEL_MKL
 #ifdef CAPSBLAS
 #ifdef NOUNDERBLAS
 double DNRM2();
@@ -313,6 +314,10 @@ void dpotrs_();
 void dpotri_();
 void dtrtri_();
 #endif
+#endif
+
+#else // INTEL_MKL
+#include "mkl.h"
 #endif
 
 

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{8ce7300f-f7ba-40a1-8c9e-99ac678ce379}</ProjectGuid>
+    <RootNamespace>CSDPLib</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <linkage-MKL-static-win-x86>static</linkage-MKL-static-win-x86>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <linkage-MKL-static-win-x86>static</linkage-MKL-static-win-x86>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <linkage-MKL-static-win-x64>static</linkage-MKL-static-win-x64>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <linkage-MKL-static-win-x64>static</linkage-MKL-static-win-x64>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>INTEL_MKL;USEGETTIME;USEOPENMP;SETNUMTHREADS;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OpenMPSupport>true</OpenMPSupport>
+      <AdditionalOptions>-openmp:experimental %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>INTEL_MKL;USEGETTIME;USEOPENMP;SETNUMTHREADS;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OpenMPSupport>true</OpenMPSupport>
+      <AdditionalOptions>-openmp:experimental %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>INTEL_MKL;BIT64;USEGETTIME;USEOPENMP;SETNUMTHREADS;_CRT_SECURE_NO_WARNINGS;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OpenMPSupport>true</OpenMPSupport>
+      <AdditionalOptions>-openmp:experimental %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>INTEL_MKL;BIT64;USEGETTIME;USEOPENMP;SETNUMTHREADS;_CRT_SECURE_NO_WARNINGS;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OpenMPSupport>true</OpenMPSupport>
+      <AdditionalOptions>-openmp:experimental %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>
+      </SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\include\blockmat.h" />
+    <ClInclude Include="..\..\..\include\declarations.h" />
+    <ClInclude Include="..\..\..\include\index.h" />
+    <ClInclude Include="..\..\..\include\parameters.h" />
+    <ClInclude Include="framework.h" />
+    <ClInclude Include="win_gettimeofday.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\lib\addscaledmat.c" />
+    <ClCompile Include="..\..\..\lib\add_mat.c" />
+    <ClCompile Include="..\..\..\lib\allocmat.c" />
+    <ClCompile Include="..\..\..\lib\calc_dobj.c" />
+    <ClCompile Include="..\..\..\lib\calc_pobj.c" />
+    <ClCompile Include="..\..\..\lib\chol.c" />
+    <ClCompile Include="..\..\..\lib\copy_mat.c" />
+    <ClCompile Include="..\..\..\lib\easysdp.c" />
+    <ClCompile Include="..\..\..\lib\Fnorm.c" />
+    <ClCompile Include="..\..\..\lib\freeprob.c" />
+    <ClCompile Include="..\..\..\lib\initparams.c" />
+    <ClCompile Include="..\..\..\lib\initsoln.c" />
+    <ClCompile Include="..\..\..\lib\linesearch.c" />
+    <ClCompile Include="..\..\..\lib\makefill.c" />
+    <ClCompile Include="..\..\..\lib\make_i.c" />
+    <ClCompile Include="..\..\..\lib\matvec.c" />
+    <ClCompile Include="..\..\..\lib\mat_mult.c" />
+    <ClCompile Include="..\..\..\lib\mat_multsp.c" />
+    <ClCompile Include="..\..\..\lib\norms.c" />
+    <ClCompile Include="..\..\..\lib\op_a.c" />
+    <ClCompile Include="..\..\..\lib\op_at.c" />
+    <ClCompile Include="..\..\..\lib\op_o.c" />
+    <ClCompile Include="..\..\..\lib\packed.c" />
+    <ClCompile Include="..\..\..\lib\psd_feas.c" />
+    <ClCompile Include="..\..\..\lib\qreig.c" />
+    <ClCompile Include="..\..\..\lib\readprob.c" />
+    <ClCompile Include="..\..\..\lib\readsol.c" />
+    <ClCompile Include="..\..\..\lib\sdp.c" />
+    <ClCompile Include="..\..\..\lib\solvesys.c" />
+    <ClCompile Include="..\..\..\lib\sortentries.c" />
+    <ClCompile Include="..\..\..\lib\sym_mat.c" />
+    <ClCompile Include="..\..\..\lib\trace_prod.c" />
+    <ClCompile Include="..\..\..\lib\tweakgap.c" />
+    <ClCompile Include="..\..\..\lib\user_exit.c" />
+    <ClCompile Include="..\..\..\lib\writeprob.c" />
+    <ClCompile Include="..\..\..\lib\writesol.c" />
+    <ClCompile Include="..\..\..\lib\zero_mat.c" />
+    <ClCompile Include="win_gettimeofday.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <NativeReference Include="libiomp5md_db">
+      <HintPath>..\..\packages\intelopenmp.devel.win\lib\native\win-x64\libiomp5md_db.dll</HintPath>
+      <Private>True</Private>
+      <Paket>True</Paket>
+    </NativeReference>
+    <NativeReference Include="libiomp5md_db">
+      <HintPath>..\..\packages\intelopenmp.devel.win\lib\native\win-x86\libiomp5md_db.dll</HintPath>
+      <Private>True</Private>
+      <Paket>True</Paket>
+    </NativeReference>
+  </ItemGroup>
+  <Import Project="..\..\packages\intelmkl.static.win-x64\build\native\intelmkl.static.win-x64.targets" Condition="Exists('..\..\packages\intelmkl.static.win-x64\build\native\intelmkl.static.win-x64.targets')" Label="Paket" />
+  <Import Project="..\..\packages\intelmkl.static.win-x86\build\native\intelmkl.static.win-x86.targets" Condition="Exists('..\..\packages\intelmkl.static.win-x86\build\native\intelmkl.static.win-x86.targets')" Label="Paket" />
+  <Import Project="..\..\packages\intelopenmp.devel.win\build\native\intelopenmp.devel.win.targets" Condition="Exists('..\..\packages\intelopenmp.devel.win\build\native\intelopenmp.devel.win.targets')" Label="Paket" />
+  <Import Project="..\..\packages\intelopenmp.redist.win\build\native\intelopenmp.redist.win.targets" Condition="Exists('..\..\packages\intelopenmp.redist.win\build\native\intelopenmp.redist.win.targets')" Label="Paket" />
+  <Import Project="..\..\packages\inteltbb.devel.win\build\native\inteltbb.devel.win.targets" Condition="Exists('..\..\packages\inteltbb.devel.win\build\native\inteltbb.devel.win.targets')" Label="Paket" />
+  <Import Project="..\..\packages\inteltbb.redist.win\build\native\inteltbb.redist.win.targets" Condition="Exists('..\..\packages\inteltbb.redist.win\build\native\inteltbb.redist.win.targets')" Label="Paket" />
+</Project>

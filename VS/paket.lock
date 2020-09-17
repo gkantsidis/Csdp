@@ -1,0 +1,16 @@
+STORAGE: PACKAGES
+RESTRICTION: || (== native) (== netcoreapp3.1) (== netstandard2.0) (== netstandard2.1)
+NUGET
+  remote: https://api.nuget.org/v3/index.json
+    intelmkl.static.win-x64 (2020.3.279)
+      intelopenmp.devel.win (>= 2020.0 < 2021.0)
+      inteltbb.devel.win (>= 2020.0 < 2021.0)
+    intelmkl.static.win-x86 (2020.3.279)
+      intelopenmp.devel.win (>= 2020.0 < 2021.0)
+      inteltbb.devel.win (>= 2020.0 < 2021.0)
+    intelopenmp.devel.win (2020.2.254)
+      intelopenmp.redist.win (2020.2.254)
+    intelopenmp.redist.win (2020.2.254)
+    inteltbb.devel.win (2020.3.254)
+      inteltbb.redist.win (2020.3.254)
+    inteltbb.redist.win (2020.3.254)

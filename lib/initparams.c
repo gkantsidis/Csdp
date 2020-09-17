@@ -3,8 +3,12 @@
  */
 
 #include <stdio.h>
-#include <strings.h>
+#include <string.h>
 #include "declarations.h"
+
+#ifdef _MSC_VER
+#define strcasecmp _stricmp
+#endif
 
 void initparams(params,pprintlevel)
      struct paramstruc *params;
