@@ -21,32 +21,32 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{8ce7300f-f7ba-40a1-8c9e-99ac678ce379}</ProjectGuid>
-    <RootNamespace>CSDPLib</RootNamespace>
+    <ProjectGuid>{df03d991-f3d8-4d73-a038-06a7707649b7}</ProjectGuid>
+    <RootNamespace>csdp</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -95,23 +95,15 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>MKL_STDCALL;INTEL_MKL;USEGETTIME;USEOPENMP;SETNUMTHREADS;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>INTEL_MKL;USEGETTIME;USEOPENMP;SETNUMTHREADS;_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <OpenMPSupport>true</OpenMPSupport>
-      <AdditionalOptions>-openmp:experimental %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>
-      </SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <Lib>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -119,47 +111,31 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>MKL_STDCALL;INTEL_MKL;USEGETTIME;USEOPENMP;SETNUMTHREADS;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>INTEL_MKL;USEGETTIME;USEOPENMP;SETNUMTHREADS;_CRT_SECURE_NO_WARNINGS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <OpenMPSupport>true</OpenMPSupport>
-      <AdditionalOptions>-openmp:experimental %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>
-      </SubSystem>
+      <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <Lib>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>MKL_STDCALL;INTEL_MKL;USEGETTIME;USEOPENMP;SETNUMTHREADS;_CRT_SECURE_NO_WARNINGS;BIT64;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>INTEL_MKL;USEGETTIME;USEOPENMP;SETNUMTHREADS;_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <OpenMPSupport>true</OpenMPSupport>
-      <AdditionalOptions>-openmp:experimental %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>
-      </SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <Lib>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -167,73 +143,20 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>MKL_STDCALL;INTEL_MKL;USEGETTIME;USEOPENMP;SETNUMTHREADS;_CRT_SECURE_NO_WARNINGS;BIT64;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>INTEL_MKL;USEGETTIME;USEOPENMP;SETNUMTHREADS;_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <OpenMPSupport>true</OpenMPSupport>
-      <AdditionalOptions>-openmp:experimental %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\..\..\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>
-      </SubSystem>
+      <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <Lib>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\include\blockmat.h" />
-    <ClInclude Include="..\..\..\include\declarations.h" />
-    <ClInclude Include="..\..\..\include\index.h" />
-    <ClInclude Include="..\..\..\include\parameters.h" />
-    <ClInclude Include="framework.h" />
-    <ClInclude Include="win_gettimeofday.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\..\lib\addscaledmat.c" />
-    <ClCompile Include="..\..\..\lib\add_mat.c" />
-    <ClCompile Include="..\..\..\lib\allocmat.c" />
-    <ClCompile Include="..\..\..\lib\calc_dobj.c" />
-    <ClCompile Include="..\..\..\lib\calc_pobj.c" />
-    <ClCompile Include="..\..\..\lib\chol.c" />
-    <ClCompile Include="..\..\..\lib\copy_mat.c" />
-    <ClCompile Include="..\..\..\lib\easysdp.c" />
-    <ClCompile Include="..\..\..\lib\Fnorm.c" />
-    <ClCompile Include="..\..\..\lib\freeprob.c" />
-    <ClCompile Include="..\..\..\lib\initparams.c" />
-    <ClCompile Include="..\..\..\lib\initsoln.c" />
-    <ClCompile Include="..\..\..\lib\linesearch.c" />
-    <ClCompile Include="..\..\..\lib\makefill.c" />
-    <ClCompile Include="..\..\..\lib\make_i.c" />
-    <ClCompile Include="..\..\..\lib\matvec.c" />
-    <ClCompile Include="..\..\..\lib\mat_mult.c" />
-    <ClCompile Include="..\..\..\lib\mat_multsp.c" />
-    <ClCompile Include="..\..\..\lib\norms.c" />
-    <ClCompile Include="..\..\..\lib\op_a.c" />
-    <ClCompile Include="..\..\..\lib\op_at.c" />
-    <ClCompile Include="..\..\..\lib\op_o.c" />
-    <ClCompile Include="..\..\..\lib\packed.c" />
-    <ClCompile Include="..\..\..\lib\psd_feas.c" />
-    <ClCompile Include="..\..\..\lib\qreig.c" />
-    <ClCompile Include="..\..\..\lib\readprob.c" />
-    <ClCompile Include="..\..\..\lib\readsol.c" />
-    <ClCompile Include="..\..\..\lib\sdp.c" />
-    <ClCompile Include="..\..\..\lib\solvesys.c" />
-    <ClCompile Include="..\..\..\lib\sortentries.c" />
-    <ClCompile Include="..\..\..\lib\sym_mat.c" />
-    <ClCompile Include="..\..\..\lib\trace_prod.c" />
-    <ClCompile Include="..\..\..\lib\tweakgap.c" />
-    <ClCompile Include="..\..\..\lib\user_exit.c" />
-    <ClCompile Include="..\..\..\lib\writeprob.c" />
-    <ClCompile Include="..\..\..\lib\writesol.c" />
-    <ClCompile Include="..\..\..\lib\zero_mat.c" />
-    <ClCompile Include="win_gettimeofday.c" />
+    <ClCompile Include="..\..\..\solver\csdp.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
@@ -249,6 +172,11 @@
       <Private>True</Private>
       <Paket>True</Paket>
     </NativeReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CSDPLib\CSDPLib.vcxproj">
+      <Project>{8ce7300f-f7ba-40a1-8c9e-99ac678ce379}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="..\..\packages\intelmkl.static.win-x64\build\native\intelmkl.static.win-x64.targets" Condition="Exists('..\..\packages\intelmkl.static.win-x64\build\native\intelmkl.static.win-x64.targets')" Label="Paket" />
   <Import Project="..\..\packages\intelmkl.static.win-x86\build\native\intelmkl.static.win-x86.targets" Condition="Exists('..\..\packages\intelmkl.static.win-x86\build\native\intelmkl.static.win-x86.targets')" Label="Paket" />

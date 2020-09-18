@@ -138,7 +138,11 @@ void matvecsym(A,x,y)
 #ifdef CAPSBLAS
   	  DSYMV_("U",&n,&scale1,ap,&n,x+p,&inc,&scale2,y+p,&inc);
 #else
+#ifdef INTEL_MKL
+	  dsymv_("U", 1, &n, &scale1, ap, &n, x + p, &inc, &scale2, y + p, &inc);
+#else
   	  dsymv_("U",&n,&scale1,ap,&n,x+p,&inc,&scale2,y+p,&inc);
+#endif
 #endif
 #endif
 #endif

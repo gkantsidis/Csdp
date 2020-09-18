@@ -10,8 +10,12 @@
 
 #ifdef USEGETTIME
 #include <stddef.h>      /* definition of NULL */
+#ifdef _MSC_VER
+#include "..\VS\SDP\CSDPLib\win_gettimeofday.h"
+#else
 #include <sys/time.h>   /* definition of timeval struct and protyping of gettime
 			   ofday */
+#endif
 
 extern double starttime;
 extern double opotime;

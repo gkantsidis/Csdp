@@ -7,14 +7,24 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <string.h>
 #include "declarations.h"
 
-int chol_blk(n,lda,A)
+int chol_blk(n, lda, A)
+#ifdef INTEL_MKL
+MKL_INT n;
+MKL_INT lda;
+#else
      int n;
      int lda;
+#endif
      double *A;
 {
+#ifdef INTEL_MKL
+  MKL_INT info;
+#else
   int info;
+#endif
   int i;
   int j;
 
@@ -36,7 +46,7 @@ int chol_blk(n,lda,A)
   #ifdef CAPSLAPACK
     DPOTRF_("U",&n,A,&lda,&info);
   #else
-    dpotrf_("U",&n,A,&lda,&info);
+    dpotrf_("U", 1, &n, A, &lda, &info);
   #endif
 #endif
 #endif
@@ -195,7 +205,7 @@ void chol_inv(A,work)
 #ifdef CAPSLAPACK
 	  DTRTRI_("U","N",&n,ap,&n,&info);
 #else
-	  dtrtri_("U","N",&n,ap,&n,&info);
+	  dtrtri_("U", 1, "N", 1, &n,ap,&n,&info);
 #endif
 #endif
 #endif

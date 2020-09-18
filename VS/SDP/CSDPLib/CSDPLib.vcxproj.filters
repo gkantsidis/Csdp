@@ -146,7 +146,7 @@
     <ClCompile Include="..\..\..\lib\zero_mat.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="win_gettimeofday.cpp">
+    <ClCompile Include="win_gettimeofday.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
