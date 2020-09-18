@@ -46,7 +46,11 @@ MKL_INT lda;
   #ifdef CAPSLAPACK
     DPOTRF_("U",&n,A,&lda,&info);
   #else
+	#ifdef INTEL_MKL
+  info = LAPACKE_dpotrf(LAPACK_COL_MAJOR, 'U', n, A, lda);
+	#else
     dpotrf_("U", 1, &n, A, &lda, &info);
+	#endif
   #endif
 #endif
 #endif
@@ -205,7 +209,11 @@ void chol_inv(A,work)
 #ifdef CAPSLAPACK
 	  DTRTRI_("U","N",&n,ap,&n,&info);
 #else
+#ifdef INTEL_MKL
+	  info = LAPACKE_dtrtri(LAPACK_COL_MAJOR, 'U', 'N', n, ap, n);
+#else
 	  dtrtri_("U", 1, "N", 1, &n,ap,&n,&info);
+#endif
 #endif
 #endif
 #endif
