@@ -76,8 +76,8 @@ void makefill(k,C,constraints,pfill,work1,printlevel)
 		{
 		  p=ptr->iindices[j];
 		  q=ptr->jindices[j];
-		  work1.blocks[blk].data.mat[ijtok(p,q,C.blocks[blk].blocksize)]=1.0;
-		  work1.blocks[blk].data.mat[ijtok(q,p,C.blocks[blk].blocksize)]=1.0;
+		  work1.blocks[blk].data.mat[ijtok(p, q, C.blocks[blk].blocksize)] = 1.0;
+		  work1.blocks[blk].data.mat[ijtok(q, p, C.blocks[blk].blocksize)] = 1.0;
 		};
 	      break;
 	    case PACKEDMATRIX:
@@ -138,14 +138,14 @@ void makefill(k,C,constraints,pfill,work1,printlevel)
 	{
 	case DIAG:
 	  ptr->numentries=ptr->blocksize;
-	  ptr->entries=(double *) malloc((ptr->blocksize+1)*sizeof(double));
+	  ptr->entries=(double *) malloc(((size_t)ptr->blocksize+1)*sizeof(double));
 	  if (ptr->entries == NULL)
 	    {
 	      printf("Storage Allocation Failed!\n");
 	      exit(205);
 	    };
 
-	  ptr->iindices=(int *) malloc((ptr->blocksize+1)*sizeof(int));
+	  ptr->iindices=(int *) malloc(((size_t)ptr->blocksize+1)*sizeof(int));
 
 	  if (ptr->iindices == NULL)
 	    {
@@ -153,7 +153,7 @@ void makefill(k,C,constraints,pfill,work1,printlevel)
 	      exit(205);
 	    };
 
-	  ptr->jindices=(int *) malloc((ptr->blocksize+1)*sizeof(int));
+	  ptr->jindices=(int *) malloc(((size_t)ptr->blocksize+1)*sizeof(int));
 
 	  if (ptr->jindices == NULL)
 	    {
@@ -163,9 +163,9 @@ void makefill(k,C,constraints,pfill,work1,printlevel)
 
 	  for (j=1; j<=ptr->numentries; j++)
 	    {
-	      ptr->entries[j]=1.0;
-	      ptr->iindices[j]=j;
-	      ptr->jindices[j]=j;
+		  ptr->entries[j] = 1.0;
+		  ptr->iindices[j] = j;
+		  ptr->jindices[j] = j;
 	    };
 	  break;
 
@@ -175,23 +175,25 @@ void makefill(k,C,constraints,pfill,work1,printlevel)
 	case MATRIX:
 	  blksize=C.blocks[blk].blocksize;
 	  ptr->numentries=0;
-	  for (i=1; i<= blksize; i++)
-	    for (j=1; j<=blksize; j++)
-	      {
-		if (work1.blocks[blk].data.mat[ijtok(i,j,blksize)] == 1.0)
+	  for (i = 1; i <= blksize; i++) {
+		  for (j = 1; j <= blksize; j++)
 		  {
-		    ptr->numentries=ptr->numentries+1;
-		  };
-	      };
+			  auto index = ijtok(i, j, blksize);
+			  if (work1.blocks[blk].data.mat[index] == 1.0)
+			  {
+				  ptr->numentries = ptr->numentries + 1;
+			  }
+		  }
+	  }
 
-	  ptr->entries=(double *)malloc((ptr->numentries+1)*sizeof(double));
+	  ptr->entries=(double *)malloc(((size_t)ptr->numentries+1)*sizeof(double));
 	  if (ptr == NULL)
 	    {
 	      printf("Storage Allocation Failed!\n");
 	      exit(205);
 	    };
 
-	  ptr->iindices=(int *) malloc((ptr->numentries+1)*sizeof(int));
+	  ptr->iindices=(int *) malloc(((size_t)ptr->numentries+1)*sizeof(int));
 
 	  if (ptr->iindices == NULL)
 	    {
@@ -199,7 +201,7 @@ void makefill(k,C,constraints,pfill,work1,printlevel)
 	      exit(205);
 	    };
 
-	  ptr->jindices=(int *) malloc((ptr->numentries+1)*sizeof(int));
+	  ptr->jindices=(int *) malloc(((size_t)ptr->numentries+1)*sizeof(int));
 
 	  if (ptr->jindices == NULL)
 	    {
@@ -242,7 +244,7 @@ void makefill(k,C,constraints,pfill,work1,printlevel)
       while (ptr != NULL)
 	{
 	  blk=ptr->blocknum;
-	  printf("Block %d, Size %d, Fill %d, %.2f \n",blk,C.blocks[blk].blocksize,ptr->numentries,100.0*ptr->numentries/(C.blocks[blk].blocksize*C.blocks[blk].blocksize*1.0));
+	  printf("Block %d, Size %d, Fill %d, %.2f \n", blk, C.blocks[blk].blocksize, ptr->numentries, 100.0 * ptr->numentries / (1.0 * C.blocks[blk].blocksize * C.blocks[blk].blocksize));
 	  ptr=ptr->next;
 	};      
     };

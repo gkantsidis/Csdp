@@ -168,7 +168,7 @@ int read_prob(fname,pn,pk,pC,pa,pconstraints,printlevel)
    * Keep track of which blocks have off diagonal entries. 
    */
 
-  isdiag=(int *)malloc((nblocks+1)*sizeof(int));
+  isdiag = (int*)malloc(sizeof(int) * ((size_t)1 + nblocks));
   for (i=1; i<=nblocks; i++)
     isdiag[i]=1;
 
@@ -177,7 +177,7 @@ int read_prob(fname,pn,pk,pC,pa,pconstraints,printlevel)
    */
 
   pC->nblocks=nblocks;
-  pC->blocks=(struct blockrec *)malloc((nblocks+1)*sizeof(struct blockrec));
+  pC->blocks = (struct blockrec*)malloc(sizeof(struct blockrec) * ((size_t)1 + nblocks));
   if (pC->blocks == NULL)
     {
       if (printlevel >= 1)
@@ -189,7 +189,7 @@ int read_prob(fname,pn,pk,pC,pa,pconstraints,printlevel)
    * Allocate space for the constraints.
    */
 
-  myconstraints=(struct constraintmatrix *)malloc((*pk+1)*sizeof(struct constraintmatrix));
+  myconstraints = (struct constraintmatrix*)malloc(((size_t)1 + (*pk)) * sizeof(struct constraintmatrix));
 
   if (myconstraints == NULL)
     {
@@ -206,7 +206,7 @@ int read_prob(fname,pn,pk,pC,pa,pconstraints,printlevel)
       myconstraints[i].blocks=NULL;
     };
 
-  *pa=(double *)malloc((*pk+1)*sizeof(double));
+  *pa=(double *)malloc(((size_t)*pk+1)*sizeof(double));
 
   if (*pa == NULL)
     {
@@ -251,7 +251,7 @@ int read_prob(fname,pn,pk,pC,pa,pconstraints,printlevel)
 	       */
 	      pC->blocks[blk].blocksize=abs(blksz);
 	      pC->blocks[blk].blockcategory=DIAG;
-	      pC->blocks[blk].data.vec=(double *)malloc((1+abs(blksz))*sizeof(double));
+	      pC->blocks[blk].data.vec=(double *)malloc(((size_t)1+abs(blksz))*sizeof(double));
 	      if (pC->blocks[blk].data.vec == NULL)
 		{
                   if (printlevel >= 1)
@@ -282,7 +282,7 @@ b	       */
                */
 	      pC->blocks[blk].blocksize=abs(blksz);
 	      pC->blocks[blk].blockcategory=MATRIX;
-	      pC->blocks[blk].data.mat=(double *)malloc((blksz*blksz)*sizeof(double));
+	      pC->blocks[blk].data.mat=(double *)malloc(((size_t)blksz*blksz)*sizeof(double));
 	      if (pC->blocks[blk].data.mat == NULL)
 		{
                   if (printlevel >= 1)

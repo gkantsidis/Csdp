@@ -50,7 +50,7 @@ void initsoln(n,k,C,a,constraints,pX0,py0,pZ0)
    * Allocate space to store the norms of the constraint matrices. 
    */
 
-  normsofA=(double *)malloc(sizeof(double)*(k+1));
+  normsofA=(double *)malloc(sizeof(double)*((size_t)k+1));
   if (normsofA == NULL)
     {
       printf("Storage allocation failed!\n");
