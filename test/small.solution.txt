@@ -1,0 +1,7 @@
+https://github.com/coin-or/Csdp/issues/11
+
+    [     1/2       1/sqrt(2)   1/sqrt(2) ]
+X = [ 1/sqrt(2)       2           0       ]
+    [ 1/sqrt(2)       0           2       ]
+	
+Optiomal value is sqrt(2).
