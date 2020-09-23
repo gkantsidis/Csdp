@@ -43,6 +43,10 @@
 #define SPARSELIMC 0.01
 #endif
 
+#pragma warning ( push )
+#pragma warning ( disable : 4101 )
+
+
 void mat_multspb(scale1,scale2,A,B,C,fill)
      double scale1,scale2;
      struct blockmatrix A,B,C;
@@ -89,7 +93,7 @@ void mat_multspb(scale1,scale2,A,B,C,fill)
 	       * If this matrix is fairly dense, then don't bother with
 	       * This approach.
 	       */
-	      if (ptr->numentries/(blksize*blksize*1.0) > SPARSELIMB)
+	      if (ptr->numentries/(1.0*blksize*blksize) > SPARSELIMB)
 		{
 		  /*
 		   * A dense block.  Do it the old fashioned way.
@@ -211,7 +215,7 @@ void mat_multspb(scale1,scale2,A,B,C,fill)
 	       * If this matrix is fairly dense, then don't bother with
 	       * This approach.
 	       */
-	      if (ptr->numentries/(blksize*blksize*1.0) > SPARSELIMB)
+	      if (ptr->numentries/(1.0*blksize*blksize) > SPARSELIMB)
 		{
 		  /*
 		   * A dense block.  Do it the old fashioned way.
@@ -326,7 +330,7 @@ void mat_multspa(scale1,scale2,A,B,C,fill)
 	       * If this matrix is fairly dense, then don't bother with
 	       * This approach.
 	       */
-	      if (ptr->numentries/(blksize*blksize*1.0) > SPARSELIMA)
+	      if (ptr->numentries/(1.0*blksize*blksize) > SPARSELIMA)
 		{
 		  /*
 		   * A dense block.  Do it the old fashioned way.
@@ -450,7 +454,7 @@ void mat_multspa(scale1,scale2,A,B,C,fill)
 	       * If this matrix is fairly dense, then don't bother with
 	       * This approach.
 	       */
-	      if (ptr->numentries/(blksize*blksize*1.0) > SPARSELIMA)
+	      if (ptr->numentries/(1.0*blksize*blksize) > SPARSELIMA)
 		{
 		  /*
 		   * A dense block.  Do it the old fashioned way.
@@ -572,7 +576,7 @@ void mat_multspc(scale1,scale2,A,B,C,fill)
 	       * If this matrix is fairly dense, then don't bother with
 	       * This approach.
 	       */
-	      if (ptr->numentries/(blksize*blksize*1.0) > SPARSELIMC)
+	      if (ptr->numentries/(1.0*blksize*blksize) > SPARSELIMC)
 		{
 		  /*
 		   * A dense block.  Do it the old fashioned way.
@@ -664,7 +668,7 @@ void mat_multspc(scale1,scale2,A,B,C,fill)
 	       * If this matrix is fairly dense, then don't bother with
 	       * This approach.
 	       */
-	      if (ptr->numentries/(blksize*blksize*1.0) > SPARSELIMC)
+	      if (ptr->numentries/(1.0*blksize*blksize) > SPARSELIMC)
 		{
 		  /*
 		   * A dense block.  Do it the old fashioned way.
@@ -715,7 +719,7 @@ void mat_multspc(scale1,scale2,A,B,C,fill)
     };
 }
 
-
+#pragma warning ( pop )
 
 
 

@@ -3,12 +3,8 @@
  */
 
 #include <stdio.h>
-#include <string.h>
+#include <strings.h>
 #include "declarations.h"
-
-#ifdef _MSC_VER
-#define strcasecmp _stricmp
-#endif
 
 void initparams(params,pprintlevel)
      struct paramstruc *params;
@@ -126,7 +122,10 @@ void initparams(params,pprintlevel)
           /*
            * Now, adjust the parameter as needed.
            */
-          
+#pragma warning ( push )
+#pragma warning ( disable : 4244 )
+#pragma warning ( disable : 6054 )
+
           if (strcasecmp(parametername,"axtol")==0)
             {
               params->axtol=value;
@@ -226,6 +225,8 @@ void initparams(params,pprintlevel)
           printf("param.csdp: unrecognized parameter, %s\n",
                  parametername);
         };
+
+#pragma warning ( pop )
 
       /*
        * Close the parameter file.   

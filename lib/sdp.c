@@ -47,13 +47,8 @@
 
 
 #include <stddef.h>      /* definition of NULL */
-
-#ifdef _MSC_VER
-#include "..\VS\SDP\CSDPLib\win_gettimeofday.h"
-#else
 #include <sys/time.h>   /* definition of timeval struct and protyping of gettime
 			   ofday */
-#endif
 
 double opotime=0.0;
 double factortime=0.0;
@@ -776,8 +771,6 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 	   t1=(double)tp.tv_sec+(1.0e-6)*tp.tv_usec;
 #endif
 
-	   const char* uplo = "U";
-
 #ifdef NOUNDERLAPACK
   #ifdef CAPSLAPACK
 	   DPOTRF("U",&m,O,&ldam,&info);
@@ -788,7 +781,7 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
   #ifdef CAPSLAPACK
 	   DPOTRF_("U",&m,O,&ldam,&info);
   #else
-	   dpotrf_(uplo, strlen(uplo), &m,O,&ldam,&info);
+	   dpotrf_("U",&m,O,&ldam,&info);
   #endif
 #endif
 

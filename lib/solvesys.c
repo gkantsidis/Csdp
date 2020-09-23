@@ -6,7 +6,6 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
 #include "declarations.h"
 
 int solvesys(m,ldam,A,rhs)
@@ -19,8 +18,6 @@ int solvesys(m,ldam,A,rhs)
   int info;
 
   incx=1;
-
-  const char* uplo = "U";
 
 #ifdef HIDDENSTRLEN
   dpotrs_("U",&m,&incx,A,&ldam,rhs+1,&ldam,&info,1);
@@ -35,7 +32,7 @@ int solvesys(m,ldam,A,rhs)
   #ifdef CAPSLAPACK	
 	   DPOTRS_("U",&m,&incx,A,&ldam,rhs+1,&ldam,&info);
   #else
-	   dpotrs_(uplo, strlen(uplo), &m,&incx,A,&ldam,rhs+1,&ldam,&info);
+	   dpotrs_("U",&m,&incx,A,&ldam,rhs+1,&ldam,&info);
   #endif
 #endif
 #endif

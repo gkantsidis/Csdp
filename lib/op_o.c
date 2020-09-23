@@ -16,6 +16,8 @@
 #endif
 #include "declarations.h"
 
+#pragma warning( push )
+#pragma warning (disable : 4101)
 
 void
 op_o(k, constraints, byblocks, Zi, X, O, work1, work2)
@@ -83,7 +85,7 @@ op_o(k, constraints, byblocks, Zi, X, O, work1, work2)
   if (max_blknum > 0) 
     {
       work = (double **) malloc(sizeof(double *) *
-				(max_threads * 2 + 1));
+				((size_t)2 * max_threads + 1));
       if (work == NULL) 
 	{
 	  printf("Failed to allocate memory for parallel execution (1)!\n");
@@ -451,3 +453,5 @@ op_o(k, constraints, byblocks, Zi, X, O, work1, work2)
     };
 
 }
+
+#pragma warning( pop )

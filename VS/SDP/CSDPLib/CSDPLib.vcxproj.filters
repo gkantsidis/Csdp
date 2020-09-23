@@ -33,6 +33,9 @@
     <ClInclude Include="win_gettimeofday.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="csdp_vc_redirects.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\lib\add_mat.c">

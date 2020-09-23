@@ -5,6 +5,8 @@
 #include <stdlib.h>
 #include "declarations.h"
 
+#pragma warning( push )
+#pragma warning (disable : 4101)
 
 void op_a(k,constraints,X,result)
      int k;
@@ -73,6 +75,8 @@ void op_a(k,constraints,X,result)
       result[i] += contrib;
 
     };
+
+#pragma warning( pop )
 }
 
 

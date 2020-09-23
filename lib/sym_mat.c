@@ -6,6 +6,9 @@
 #include <stdio.h>
 #include "declarations.h"
 
+#pragma warning( push )
+#pragma warning (disable : 4101)
+
 void sym_mat(A)
      struct blockmatrix A;
 {
@@ -47,4 +50,4 @@ void sym_mat(A)
 
 }
 
-
+#pragma warning( pop )

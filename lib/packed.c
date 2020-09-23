@@ -105,7 +105,7 @@ void alloc_mat_packed(A,pB)
    * Then allocate space for the block records.
    */
 
-  pB->blocks=(struct blockrec *)malloc(sizeof(struct blockrec)*(A.nblocks+1));
+  pB->blocks=(struct blockrec *)malloc(sizeof(struct blockrec)*((size_t)1+A.nblocks));
   if (pB->blocks == NULL)
     {
       printf("Storage allocation failed!\n");
@@ -123,7 +123,7 @@ void alloc_mat_packed(A,pB)
 	case DIAG:
 	  pB->blocks[blk].blockcategory=A.blocks[blk].blockcategory;
 	  pB->blocks[blk].blocksize=A.blocks[blk].blocksize;
-	  pB->blocks[blk].data.vec=(double *)malloc(sizeof(double)*(A.blocks[blk].blocksize+1));
+	  pB->blocks[blk].data.vec=(double *)malloc(sizeof(double)*(((size_t)1+A.blocks[blk].blocksize)));
 	  if (pB->blocks[blk].data.vec == NULL)
 	    {
 	      printf("Storage allocation failed!\n");
@@ -134,7 +134,7 @@ void alloc_mat_packed(A,pB)
 	  n=A.blocks[blk].blocksize;
 	  pB->blocks[blk].blockcategory=PACKEDMATRIX;
 	  pB->blocks[blk].blocksize=n;
-	  pB->blocks[blk].data.mat=(double *)malloc(sizeof(double)*n*(n+1)/2);
+	  pB->blocks[blk].data.mat=(double *)malloc(sizeof(double)*n*((size_t)n+1)/2);
 	  if (pB->blocks[blk].data.mat == NULL)
 	    {
 	      printf("Storage allocation failed!\n");
@@ -183,6 +183,9 @@ void free_mat_packed(A)
 
 }
 
+#pragma warning( push )
+#pragma warning (disable : 4101)
+
 void triu(A)
      struct blockmatrix A;
 {
@@ -209,3 +212,5 @@ void triu(A)
     };
   
 }     
+
+#pragma warning( pop )

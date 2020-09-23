@@ -5,20 +5,12 @@
 #include <math.h>
 #include "declarations.h"
 
-double norm2(n, x)
-#ifdef INTEL_MKL
-MKL_INT n;
-#else
+double norm2(n,x)
      int n;
-#endif
      double *x;
 {
   double nrm;
-#ifdef INTEL_MKL
-  MKL_INT incx = 1;
-#else
   int incx=1;
-#endif
 
 #ifdef NOUNDERBLAS
 #ifdef CAPSBLAS
