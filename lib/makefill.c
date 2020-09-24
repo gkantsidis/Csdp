@@ -48,7 +48,7 @@ void makefill(k,C,constraints,pfill,work1,printlevel)
 #endif
 		for (j = 1; j <= blksize; j++)
 		{
-			// TODO: The SIMD directive does not work well with the VSC compiler
+			/* TODO: The SIMD directive does not work well with the VSC compiler */
 #ifndef _MSC_VER
 #pragma omp simd
 #endif
