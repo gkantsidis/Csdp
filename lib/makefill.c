@@ -35,19 +35,29 @@ void makefill(k,C,constraints,pfill,work1,printlevel)
       switch(C.blocks[blk].blockcategory)
 	{
 	case DIAG:
+#ifndef _MSC_VER
 #pragma omp simd
+#endif
 	  for (i=1; i<=C.blocks[blk].blocksize; i++)
 	    work1.blocks[blk].data.vec[i]=1.0;
 	  break;
 	case MATRIX:
-#pragma omp parallel for schedule(dynamic,64) default(none) private(i,j) shared(C,work1,blk)	  
-	  for (j=1; j<=C.blocks[blk].blocksize; j++)
+		blksize = C.blocks[blk].blocksize;
+#ifndef _MSC_VER
+#pragma omp parallel for schedule(dynamic,64) default(none) private(i,j) shared(C,work1,blk,blksize)	  
+#endif
+		for (j = 1; j <= blksize; j++)
+		{
+			// TODO: The SIMD directive does not work well with the VSC compiler
+#ifndef _MSC_VER
 #pragma omp simd
-	    for (i=1; i<=C.blocks[blk].blocksize; i++)
-	      {
-		if ((C.blocks[blk].data.mat[ijtok(i,j,C.blocks[blk].blocksize)] != 0.0) || (i == j))
-		  work1.blocks[blk].data.mat[ijtok(i,j,C.blocks[blk].blocksize)]=1.0;
-	      };
+#endif
+			for (i = 1; i <= blksize; i++)
+			{
+				if ((C.blocks[blk].data.mat[ijtok(i, j, C.blocks[blk].blocksize)] != 0.0) || (i == j))
+					work1.blocks[blk].data.mat[ijtok(i, j, C.blocks[blk].blocksize)] = 1.0;
+			};
+		};
 	  break;
 	case PACKEDMATRIX:
 	default:
@@ -178,10 +188,16 @@ void makefill(k,C,constraints,pfill,work1,printlevel)
 	  for (i = 1; i <= blksize; i++) {
 		  for (j = 1; j <= blksize; j++)
 		  {
-			  auto index = ijtok(i, j, blksize);
-			  if (work1.blocks[blk].data.mat[index] == 1.0)
+			  long index = ijtok(i, j, blksize);
+			  double value = work1.blocks[blk].data.mat[index];
+			  if (value == 1.0)
 			  {
+				  //printf("++++ %d %d %d %ld\n", blk, i, j, index);
 				  ptr->numentries = ptr->numentries + 1;
+			  }
+			  else
+			  {
+				  //printf("---- %d %d %d %ld %f\n", blk, i, j, index, value);
 			  }
 		  }
 	  }

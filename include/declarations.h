@@ -316,7 +316,7 @@ void dtrtri_();
 #endif
 #endif
 
-#else // INTEL_MKL
+#else /* INTEL_MKL */
 #include "mkl.h"
 #include "csdp_vc_redirects.h"
 #endif

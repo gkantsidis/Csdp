@@ -32,7 +32,9 @@ void sym_mat(A)
 	case MATRIX:
 	  n=A.blocks[blk].blocksize;
 	  ap=A.blocks[blk].data.mat;
+#ifndef _MSC_VER
 #pragma omp parallel for schedule(dynamic,64) default(none) private(i,j,foo) shared(ap,n)
+#endif
 	  for (j=1; j<=n; j++)
 	    for (i=1; i<j; i++)
 	      {

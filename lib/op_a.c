@@ -24,7 +24,9 @@ void op_a(k,constraints,X,result)
   struct sparseblock *ptr;
   double contrib;
 
+#ifndef _MSC_VER
 #pragma omp parallel for schedule(dynamic,64) default(none) private(i,contrib,ptr,blk,nume,vec,j,p,mat,ent,q) shared(k,constraints,result,X)
+#endif
   for (i=1; i<=k; i++)
     {
       result[i]=0.0;

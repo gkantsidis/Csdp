@@ -36,7 +36,9 @@ double trace_prod(A,B)
 	  break;
 	case MATRIX:
 	  temp=0;
+#ifndef _MSC_VER
 #pragma omp parallel for schedule(dynamic,64) default(none) private(i,j) shared(A,B,blk) reduction(+:temp)
+#endif
 	  for (j=1; j<=A.blocks[blk].blocksize; j++)
 	    for (i=1; i<j; i++)
 	      temp=temp+A.blocks[blk].data.mat[ijtok(i,j,A.blocks[blk].blocksize)]

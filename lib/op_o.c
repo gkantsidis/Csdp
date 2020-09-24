@@ -125,7 +125,9 @@ op_o(k, constraints, byblocks, Zi, X, O, work1, work2)
   /*
    * First, zero out the O matrix. 
    */
+#ifndef _MSC_VER
 #pragma omp parallel for schedule(dynamic,64) default(none) shared(O,ldam,k) private(j,i)
+#endif
   for (j = 1; j <= k; j++)
     for (i = 1; i <= k; i++)
       O[ijtok(i, j, (long int) ldam)] = 0.0;
@@ -137,7 +139,9 @@ op_o(k, constraints, byblocks, Zi, X, O, work1, work2)
 #endif
 #endif
 
+#ifndef _MSC_VER
 #pragma omp parallel for schedule(dynamic,64) default(none) shared(k,constraints,byblocks,Zi,X,O,work1, work2, work, ldam) private(j, ii, jj, blocksize, p, q, r, s, ptri, ptrj, blocknum, contrib, Ziblk, Xblk, workblk, work2blk, enti, entj, scale1, scale2, thread_num)
+#endif
   for (i = 1; i <= k; i++) 
     {
 
@@ -433,7 +437,9 @@ op_o(k, constraints, byblocks, Zi, X, O, work1, work2)
    * Go back and pick up any updates that were left below the diagonal.
    */
 
+#ifndef _MSC_VER
 #pragma omp parallel for schedule(dynamic,64) default(none) shared(O,ldam,k) private(j,i)
+#endif
   for (j = 2; j <= k; j++)
     for (i = 1; i < j; i++)
       O[ijtok(i, j, (long int) ldam)] += O[ijtok(j,i, (long int) ldam)];

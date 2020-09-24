@@ -29,7 +29,9 @@ void store_packed(A,B)
 	  p=A.blocks[blk].data.mat;
 	  q=B.blocks[blk].data.mat;
 	  n=A.blocks[blk].blocksize;
+#ifndef _MSC_VER
 #pragma omp parallel for schedule(dynamic,64) private(i,j) shared(p,q,n) 
+#endif
 	  for (j=1; j<=n; j++)
 	    for (i=1; i<=j; i++)
 	      q[ijtokp(i,j,n)]=p[ijtok(i,j,n)];
@@ -64,11 +66,15 @@ void store_unpacked(A,B)
 	  p=A.blocks[blk].data.mat;
 	  q=B.blocks[blk].data.mat;
 	  n=A.blocks[blk].blocksize;
+#ifndef _MSC_VER
 #pragma omp parallel for schedule(dynamic,64) private(i,j) shared(p,q,n)
+#endif
 	  for (j=1; j<=n; j++)
 	    for (i=1; i<=j; i++)
 	      q[ijtok(i,j,n)]=p[ijtokp(i,j,n)];
+#ifndef _MSC_VER
 #pragma omp parallel for schedule(dynamic,64) private(i,j) shared(p,q,n)
+#endif
 	  for (j=1; j<n; j++)
 	    for (i=j+1; i<=n; i++)
 	      q[ijtok(i,j,n)]=q[ijtok(j,i,n)];
@@ -111,6 +117,8 @@ void alloc_mat_packed(A,pB)
       printf("Storage allocation failed!\n");
       exit(205);
     };
+  memset(pB->blocks, 0x00, sizeof(struct blockrec)* ((size_t)1 + A.nblocks));
+
   /*
    *  Now, fill in the info for each block.
    */
@@ -129,7 +137,9 @@ void alloc_mat_packed(A,pB)
 	      printf("Storage allocation failed!\n");
 	      exit(205);
 	    };
+	  memset(pB->blocks[blk].data.vec, 0x00, sizeof(double)* (((size_t)1 + A.blocks[blk].blocksize)));
 	  break;
+
 	case MATRIX:
 	  n=A.blocks[blk].blocksize;
 	  pB->blocks[blk].blockcategory=PACKEDMATRIX;
@@ -140,6 +150,7 @@ void alloc_mat_packed(A,pB)
 	      printf("Storage allocation failed!\n");
 	      exit(205);
 	    };
+	  memset(pB->blocks[blk].data.mat, 0x00, sizeof(double) * n * ((size_t)n + 1) / 2);
 	  break;
 	default:
 	  printf("Illegal block type!\n");
@@ -200,7 +211,9 @@ void triu(A)
 	  break;
 	case MATRIX:
 	  n=A.blocks[blk].blocksize;
+#ifndef _MSC_VER
 #pragma omp parallel for schedule(dynamic,64) private(i,j) shared(A,n) 
+#endif
 	  for (j=1; j<n; j++)
 	    for (i=j+1; i<=n; i++)
 	      A.blocks[blk].data.mat[ijtok(i,j,n)]=0.0;

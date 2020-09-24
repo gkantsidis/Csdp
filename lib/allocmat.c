@@ -29,6 +29,8 @@ void alloc_mat(A,pB)
       printf("Storage allocation failed!\n");
       exit(205);
     };
+  memset(pB->blocks, 0x00, sizeof(struct blockrec) * (A.nblocks + 1));
+
   /*
    *  Now, fill in the info for each block.
    */
@@ -46,6 +48,7 @@ void alloc_mat(A,pB)
 	      printf("Storage allocation failed!\n");
 	      exit(205);
 	    };
+	  memset(pB->blocks[blk].data.vec, 0x00, sizeof(double) * (A.blocks[blk].blocksize + 1));
 	  break;
 	case MATRIX:
 	  pB->blocks[blk].data.mat=(double *)malloc(sizeof(double)*(A.blocks[blk].blocksize)*(A.blocks[blk].blocksize));
@@ -54,6 +57,7 @@ void alloc_mat(A,pB)
 	      printf("Storage allocation failed!\n");
 	      exit(205);
 	    };
+	  memset(pB->blocks[blk].data.mat, 0x00, sizeof(double) * (A.blocks[blk].blocksize) * (A.blocks[blk].blocksize));
 	  break;
 	default:
 	  printf("alloc_mat illegal block type!\n");

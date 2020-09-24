@@ -31,7 +31,9 @@ void zero_mat(A)
 	    };
 	  break;
 	case MATRIX:
+#ifndef _MSC_VER
 #pragma omp parallel for schedule(dynamic,64) default(none) shared(A,blk) private(j,i)
+#endif
 	  for (j=1; j<=A.blocks[blk].blocksize; j++)
 	    for (i=1; i<=A.blocks[blk].blocksize; i++)
 	      A.blocks[blk].data.mat[ijtok(i,j,A.blocks[blk].blocksize)]=0.0;

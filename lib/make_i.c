@@ -23,7 +23,9 @@ void make_i(A)
 	  break;
 	case MATRIX:
 	  p=A.blocks[blk].data.mat;
+#ifndef _MSC_VER
 #pragma omp parallel for schedule(dynamic,64) default(none) private(i,j) shared(blk,p,A)
+#endif
 	  for (j=1; j<=A.blocks[blk].blocksize; j++)
 	    for (i=1; i<=A.blocks[blk].blocksize; i++)
 	      p[ijtok(i,j,A.blocks[blk].blocksize)]=0.0;
@@ -61,7 +63,9 @@ void make_scaled_i(A,mu)
 	  break;
 	case MATRIX:
 	  p=A.blocks[blk].data.mat;
+#ifndef _MSC_VER
 #pragma omp parallel for schedule(dynamic,64) default(none) private(i,j) shared(blk,p,A)
+#endif
 	  for (j=1; j<=A.blocks[blk].blocksize; j++)
 	    for (i=1; i<=A.blocks[blk].blocksize; i++)
 	      p[ijtok(i,j,A.blocks[blk].blocksize)]=0.0;

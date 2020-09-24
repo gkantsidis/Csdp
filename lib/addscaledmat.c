@@ -24,14 +24,20 @@ void addscaledmat(A,scale,B,C)
       switch (A.blocks[blk].blockcategory)
 	{
 	case DIAG:
+#ifndef _MSC_VER
 #pragma omp simd
+#endif
 	  for (i=1; i<=A.blocks[blk].blocksize; i++)
 	    C.blocks[blk].data.vec[i] = A.blocks[blk].data.vec[i] + scale*B.blocks[blk].data.vec[i];
 	  break;
 	case MATRIX:
+#ifndef _MSC_VER
 #pragma omp parallel for schedule(dynamic,64) default(none) private(i,j) shared(A,B,C,scale,blk) 
+#endif
 	  for (j=1; j<=A.blocks[blk].blocksize; j++)
+#ifndef _MSC_VER
 #pragma omp simd
+#endif
 	    for (i=1; i<=A.blocks[blk].blocksize; i++)
 	      C.blocks[blk].data.mat[ijtok(i,j,A.blocks[blk].blocksize)]=
 		A.blocks[blk].data.mat[ijtok(i,j,A.blocks[blk].blocksize)]+
@@ -62,13 +68,17 @@ void addscaledI(A,scale)
     {
       switch (A.blocks[blk].blockcategory)
 	{
-	case DIAG:
+	  case DIAG:
+#ifndef _MSC_VER
 #pragma omp simd
+#endif
 	  for (i=1; i<=A.blocks[blk].blocksize; i++)
 	    A.blocks[blk].data.vec[i] += scale;
 	  break;
 	case MATRIX:
+#ifndef _MSC_VER
 #pragma omp simd
+#endif
 	    for (i=1; i<=A.blocks[blk].blocksize; i++)
 	      A.blocks[blk].data.mat[ijtok(i,i,A.blocks[blk].blocksize)] += scale;
 	  break;
@@ -99,14 +109,20 @@ void scalemat(scale,B,C)
       switch (C.blocks[blk].blockcategory)
 	{
 	case DIAG:
+#ifndef _MSC_VER
 #pragma omp simd
+#endif
 	  for (i=1; i<=C.blocks[blk].blocksize; i++)
 	    C.blocks[blk].data.vec[i] =  scale*B.blocks[blk].data.vec[i];
 	  break;
 	case MATRIX:
+#ifndef _MSC_VER
 #pragma omp parallel for schedule(dynamic,64) default(none) private(i,j) shared(B,C,scale,blk) 
+#endif
 	  for (j=1; j<=C.blocks[blk].blocksize; j++)
+#ifndef _MSC_VER
 #pragma omp simd
+#endif
 	    for (i=1; i<=C.blocks[blk].blocksize; i++)
 	      C.blocks[blk].data.mat[ijtok(i,j,C.blocks[blk].blocksize)]=
 		scale*B.blocks[blk].data.mat[ijtok(i,j,B.blocks[blk].blocksize)];
@@ -141,14 +157,20 @@ void addscaledmatut(A,scale,B,C)
       switch (A.blocks[blk].blockcategory)
 	{
 	case DIAG:
+#ifndef _MSC_VER
 #pragma omp simd
+#endif
 	  for (i=1; i<=A.blocks[blk].blocksize; i++)
 	    C.blocks[blk].data.vec[i] = A.blocks[blk].data.vec[i] + scale*B.blocks[blk].data.vec[i];
 	  break;
 	case MATRIX:
+#ifndef _MSC_VER
 #pragma omp parallel for schedule(dynamic,64) default(none) private(i,j) shared(A,B,C,scale,blk) 
+#endif
 	  for (j=1; j<=A.blocks[blk].blocksize; j++)
+#ifndef _MSC_VER
 #pragma omp simd
+#endif
 	    for (i=1; i<=j; i++)
 	      C.blocks[blk].data.mat[ijtok(i,j,A.blocks[blk].blocksize)]=
 		A.blocks[blk].data.mat[ijtok(i,j,A.blocks[blk].blocksize)]+

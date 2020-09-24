@@ -757,7 +757,9 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 		 workvec8[i]=1.0e30;
 	     };
 
+#ifndef _MSC_VER
 #pragma omp parallel for schedule(dynamic,64) default(none) shared(O,ldam,k,workvec8) private(i,j)
+#endif
 	  for (j=1; j<=k; j++)
 	     for (i=1; i<=j; i++)
 	       O[ijtok(i,j, (long int) ldam)]=O[ijtok(i,j, (long int) ldam)]*(workvec8[i]*workvec8[j]);
@@ -802,7 +804,9 @@ int sdp(n,k,C,a,constant_offset,constraints,byblocks,fill,X,y,Z,cholxinv,
 		     diagfact=0.1;
 		   retries=retries+1;
 		   diagfact=diagfact*10.0;
+#ifndef _MSC_VER
 #pragma omp parallel for schedule(dynamic,64) private(i,j) shared(O,k,ldam)
+#endif
 		   for (i=1; i<=k-1; i++)
 		     for (j=i; j<=k; j++)
 		       O[ijtok(i,j, (long int) ldam)]=O[ijtok(j,i, (long int) ldam)];

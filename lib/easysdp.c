@@ -440,7 +440,7 @@ int easy_sdp(n,k,C,a,constraints,constant_offset,pX,py,pZ,ppobj,pdobj)
    if (printlevel >= 2)
      {
        nnz=structnnz(n,k,C,constraints);
-       printf("Structural density of O %d, %e \n",nnz,nnz*1.0/(k*k*1.0));
+       printf("Structural density of O %d, %e \n",nnz,nnz*1.0/(1.0*k*k));
      };
 
 

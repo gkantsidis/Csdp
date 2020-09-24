@@ -9,44 +9,66 @@
 #include "declarations.h"
 
 double Fnorm(A)
-     struct blockmatrix A;
+struct blockmatrix A;
 {
-  int blk;
-  double nrm;
-  double temp;
-  int i,j;
-  
-  nrm=0;
-  for (blk=1; blk<=A.nblocks; blk++)
+    int blk;
+    double nrm;
+    double temp;
+    int i, j;
+
+    nrm = 0;
+    for (blk = 1; blk <= A.nblocks; blk++)
     {
-      switch (A.blocks[blk].blockcategory)
-	{
-	case DIAG:
-	  temp=norm2(A.blocks[blk].blocksize,A.blocks[blk].data.vec+1);
-	  nrm += temp*temp;
-	  break;
-	case MATRIX:
-	  temp=0;
+		int blksize = A.blocks[blk].blocksize;
+		double* mat = A.blocks[blk].data.mat;
+
+		switch (A.blocks[blk].blockcategory)
+		{
+		case DIAG:
+			temp = norm2(blksize, A.blocks[blk].data.vec + 1);
+			nrm += temp * temp;
+			break;
+		case MATRIX:
+			temp = 0;
+#ifndef _MSC_VER 
 #pragma omp parallel for schedule(dynamic,64) default(none) private(i,j) shared(blk,A) reduction(+:temp)
-          for (j=1; j<=A.blocks[blk].blocksize; j++)
+#endif
+			for (j = 1; j <= blksize; j++)
+			{
+#ifndef _MSC_VER
 #pragma omp simd
-	    for (i=1; i<j; i++)
-	      temp+=A.blocks[blk].data.mat[ijtok(i,j,A.blocks[blk].blocksize)]*A.blocks[blk].data.mat[ijtok(i,j,A.blocks[blk].blocksize)];
-	  temp=2.0*temp;
+#endif
+				for (i = 1; i < j; i++)
+				{
+					long pos = ijtok(i, j, blksize);
+					double v = mat[pos];
+					temp += v * v;
+				};
+			};
+			temp = 2.0 * temp;
+
+#ifndef _MSC_VER
 #pragma omp simd
-	  for (i=1; i<=A.blocks[blk].blocksize; i++)
-	    temp+=A.blocks[blk].data.mat[ijtok(i,i,A.blocks[blk].blocksize)]*A.blocks[blk].data.mat[ijtok(i,i,A.blocks[blk].blocksize)];
-	  nrm += temp;
-	  break;
-	case PACKEDMATRIX:
-	default:
-	  printf("Fnorm illegal block type \n");
-	  exit(206);
-	};
+#endif
+			for (i = 1; i <= blksize; i++)
+			{
+				long pos = ijtok(i, i, blksize);
+				double v = mat[pos];
+				temp += v * v;
+			}
+
+            nrm += temp;
+            break;
+
+        case PACKEDMATRIX:
+        default:
+            printf("Fnorm illegal block type \n");
+            exit(206);
+        };
     };
 
-  nrm=sqrt(nrm);
-  return(nrm);
+    nrm = sqrt(nrm);
+    return(nrm);
 }
 
 /*

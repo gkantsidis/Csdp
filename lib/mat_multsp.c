@@ -109,7 +109,7 @@ void mat_multspb(scale1,scale2,A,B,C,fill)
 #endif
 #endif
 
-#ifdef USEOPENMP
+#if defined USEOPENMP && !defined _MSC_VER
 #pragma omp parallel default(none) private(i,ii,p,q,thread_num,total_threads,temp) shared(ptr,A,B,C,blk,blksize,scale1)
  {
    total_threads=omp_get_num_threads();
@@ -171,7 +171,9 @@ void mat_multspb(scale1,scale2,A,B,C,fill)
 		C.blocks[blk].data.vec[i]=scale2*C.blocks[blk].data.vec[i];
 	      break;
 	    case MATRIX:
+#ifndef _MSC_VER
 #pragma omp parallel for schedule(dynamic,64) default(none) private(i,j) shared(blk,C,scale2)
+#endif
 	      for (j=1; j<=C.blocks[blk].blocksize; j++)
 		for (i=1; i<=C.blocks[blk].blocksize; i++)
 		  C.blocks[blk].data.mat[ijtok(i,j,C.blocks[blk].blocksize)]=
@@ -230,7 +232,7 @@ void mat_multspb(scale1,scale2,A,B,C,fill)
 		  __builtin_prefetch(ptr->next,0,3);
 #endif
 #endif
-#ifdef USEOPENMP
+#if defined USEOPENMP && !defined _MSC_VER
 #pragma omp parallel default(none) private(i,ii,p,q,thread_num,total_threads,temp) shared(ptr,A,B,C,blk,blksize,scale1)
  {
    total_threads=omp_get_num_threads();
@@ -346,7 +348,7 @@ void mat_multspa(scale1,scale2,A,B,C,fill)
 #endif
 #endif
 
-#ifdef USEOPENMP
+#if defined USEOPENMP && !defined _MSC_VER
 #pragma omp parallel default(none) private(i,ii,p,q,thread_num,total_threads,temp) shared(ptr,A,B,C,blk,blksize,scale1)
  {
    total_threads=omp_get_num_threads();
@@ -409,7 +411,9 @@ void mat_multspa(scale1,scale2,A,B,C,fill)
 		C.blocks[blk].data.vec[i]=scale2*C.blocks[blk].data.vec[i];
 	      break;
 	    case MATRIX:
+#ifndef _MSC_VER
 #pragma omp parallel for default(none) schedule(dynamic,64) private(i,j) shared(blk,C,scale2)
+#endif
 	      for (j=1; j<=C.blocks[blk].blocksize; j++)
 		for (i=1; i<=C.blocks[blk].blocksize; i++)
 		  C.blocks[blk].data.mat[ijtok(i,j,C.blocks[blk].blocksize)]=
@@ -470,7 +474,7 @@ void mat_multspa(scale1,scale2,A,B,C,fill)
 #endif
 #endif
 
-#ifdef USEOPENMP
+#if defined USEOPENMP && !defined _MSC_VER
 #pragma omp parallel default(none) private(i,ii,p,q,thread_num,total_threads,temp) shared(ptr,A,B,C,blk,blksize,scale1)
  {
    total_threads=omp_get_num_threads();
@@ -591,7 +595,9 @@ void mat_multspc(scale1,scale2,A,B,C,fill)
 		  __builtin_prefetch(ptr->next,0,3);
 #endif
 #endif
+#ifndef _MSC_VER
 #pragma omp parallel for schedule(dynamic,64) default(none) private(i,ii,p,q,temp) shared(ptr,A,B,C,blk,blksize,scale1)
+#endif
 		  for (ii=1; ii<=ptr->numentries; ii++)
 		    {
 		      p=ptr->iindices[ii];
@@ -632,7 +638,9 @@ void mat_multspc(scale1,scale2,A,B,C,fill)
 		C.blocks[blk].data.vec[i]=scale2*C.blocks[blk].data.vec[i];
 	      break;
 	    case MATRIX:
+#ifndef _MSC_VER
 #pragma omp parallel for default(none) schedule(dynamic,64) private(i,j) shared(blk,C,scale2)
+#endif
 	      for (j=1; j<=C.blocks[blk].blocksize; j++)
 		for (i=1; i<=C.blocks[blk].blocksize; i++)
 		  C.blocks[blk].data.mat[ijtok(i,j,C.blocks[blk].blocksize)]=
