@@ -31,7 +31,7 @@ struct blockmatrix A;
 		case MATRIX:
 			temp = 0;
 #ifndef _MSC_VER 
-#pragma omp parallel for schedule(dynamic,64) default(none) private(i,j) shared(blk,A) reduction(+:temp)
+#pragma omp parallel for schedule(dynamic,64) default(none) private(i,j) shared(blk,blksize,mat,A) reduction(+:temp)
 #endif
 			for (j = 1; j <= blksize; j++)
 			{
