@@ -192,12 +192,7 @@ void makefill(k,C,constraints,pfill,work1,printlevel)
 			  double value = work1.blocks[blk].data.mat[index];
 			  if (value == 1.0)
 			  {
-				  //printf("++++ %d %d %d %ld\n", blk, i, j, index);
 				  ptr->numentries = ptr->numentries + 1;
-			  }
-			  else
-			  {
-				  //printf("---- %d %d %d %ld %f\n", blk, i, j, index, value);
 			  }
 		  }
 	  }
